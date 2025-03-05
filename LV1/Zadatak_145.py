@@ -17,7 +17,7 @@ for line in lines:
         if poruka.strip().endswith('!'):
             SMSwithExclamationMark += 1
 print("a)")
-print("Prosječan broj riječi u ham porukama: ",round(humLength/humCounter,2))
+print(f"Prosječan broj riječi u ham porukama: {round(humLength/humCounter,2)}")
 print("Prosječan broj riječi u spam porukama: ",round(spamLength/spamCounter,2))
 print("b)")
 print("Broj spam poruka koje završavaju uskličnikom: ",SMSwithExclamationMark)
