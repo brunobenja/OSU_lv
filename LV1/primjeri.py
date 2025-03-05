@@ -1,15 +1,12 @@
-""" Primjer 1.1 """
-"""
 x=23
 print(x)
 x=x+7
 print(x) 
-"""
 
-""" Primjer 1.2 """
-""" x=23
+x=23
 y=x>10
-print(y) """
+print(y)
+
 
 """ Primjer 1.3 """
 """ x=23
