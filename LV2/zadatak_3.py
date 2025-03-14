@@ -27,7 +27,7 @@ plt.title("b) druga četvrtina slike po širini")
 plt.show()
 
 # c) zarotirana slika za 90 stupnjeva
-img_rotated = np.rot90(img_org, k=3)
+img_rotated = np.rot90(img_org, k=-1)
 plt.figure()
 plt.imshow(img_rotated, cmap="gray")
 plt.title("c) zarotirana slika za 90 stupnjeva")
