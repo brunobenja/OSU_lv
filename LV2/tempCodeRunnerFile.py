@@ -1,0 +1,5 @@
+plt.xlim(0, 4)
+plt.ylim(0, 4)
+plt.xlabel("x os")
+plt.ylabel("y os")
+plt.title("Primjer")
