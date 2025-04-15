@@ -32,7 +32,7 @@ print(f"Broj različitih boja: {len(broj_boja)}")
 # 2)Primijenite algoritam K srednjih vrijednosti
 # koji ce pronaci grupe u RGB vrijednostima
 # elemenata originalne slike
-K = 3  # Broj grupa (boja)
+K = 2  # Broj grupa (boja)
 kmeans = KMeans(n_clusters=K, random_state=42)
 kmeans.fit(img_array)
 centroids = kmeans.cluster_centers_
@@ -54,3 +54,35 @@ plt.title(f"Kvantizirana slika (K={K})")
 plt.imshow(img_aprox)
 plt.tight_layout()
 plt.show()
+
+
+# 6) Grafički prikažite ovisnost J o broju grupa K
+inertia_values = []
+K_values = range(1, 11)  # Testiramo za K od 1 do 10
+
+for K in K_values:
+    kmeans = KMeans(n_clusters=K, random_state=42)
+    kmeans.fit(img_array)
+    inertia_values.append(kmeans.inertia_)
+
+# Prikaz grafa ovisnosti J o K
+plt.figure()
+plt.plot(K_values, inertia_values, marker="o")
+plt.xlabel("Broj grupa K")
+plt.ylabel("Vrijednost J (inertia)")
+plt.title("Ovisnost J o broju grupa K")
+plt.grid()
+plt.show()
+
+# 7) Prikaz elemenata slike koji pripadaju jednoj grupi kao binarnu sliku
+for group in range(K):
+    # Stvaranje binarne maske za trenutnu grupu
+    binary_mask = (labels == group).astype(np.float64)
+    binary_image = np.reshape(binary_mask, (w, h))
+
+    # Prikaz binarne slike
+    plt.figure()
+    plt.title(f"Grupa {group + 1} - Binarna slika")
+    plt.imshow(binary_image, cmap="gray")
+    plt.tight_layout()
+    plt.show()

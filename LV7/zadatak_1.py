@@ -6,8 +6,9 @@ from sklearn.cluster import KMeans, AgglomerativeClustering
 
 
 # generiranje umjetnih podatkovnih primjera
+# n_samples = zeljeni br primjera, flagc=nacin generiranja
 def generate_data(n_samples, flagc):
-    # n_samples = zeljeni br primjera, flagc=nacin generiranja
+
     # 3 grupe
     if flagc == 1:
         random_state = 365
@@ -44,7 +45,7 @@ def generate_data(n_samples, flagc):
 
 
 # generiranje podatkovnih primjera
-X = generate_data(500, 2)  # 1=defaultni, 2=rotirani, 3=4 grupe, 4=circle, 5=moon
+X = generate_data(500, 1)  # 1=defaultni, 2=rotirani, 3=4 grupe, 4=circle, 5=moon
 
 # prikazi primjere u obliku dijagrama rasprsenja
 plt.figure()
@@ -58,8 +59,11 @@ plt.show()
 #########################
 #########################
 #########################
-# 1) Postoji 3 grupe u generiranim podacima
+# 1) Postoje 3 grupe u generiranim podacima
 # u line 47 mijenjam način generiranja podataka
+
+# fit određuje centre
+# predict određuje kojem centru pripada podatak
 
 
 # 2) Primijenite metodu K srednjih vrijednosti te
@@ -71,25 +75,24 @@ def apply_kmeans(X, n_clusters):
 
     # Prikaz rezultata grupiranja
     plt.figure()
-    plt.scatter(X[:, 0], X[:, 1], c=y_kmeans, cmap="viridis", edgecolor="k", alpha=0.7)
+    plt.scatter(X[:, 0], X[:, 1], c=y_kmeans, cmap="viridis")
     plt.scatter(
         kmeans.cluster_centers_[:, 0],
         kmeans.cluster_centers_[:, 1],
-        s=200,
+        s=50,
         c="red",
-        marker="X",
+        marker="x",
         label="Centroids",
     )
-    plt.xlabel("$x_1$")
-    plt.ylabel("$x_2$")
+    plt.xlabel("x1")
+    plt.ylabel("x2")
     plt.title(f"K-Means (K={n_clusters})")
     plt.legend()
     plt.show()
 
 
-# Testiranje s različitim brojem grupa K
+# Testiranje s različitim K
 for k in [2, 3, 4, 5]:
-    print(f"Primjena K-Means s K={k}")
     apply_kmeans(X, n_clusters=k)
 
 
