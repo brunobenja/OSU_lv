@@ -39,18 +39,18 @@ model.add(layers.Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padd
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
 model.add(layers.Flatten())
 model.add(layers.Dense(500, activation='relu'))
+model.add(layers.Dropout(0.3))
 model.add(layers.Dense(10, activation='softmax'))
 
 model.summary()
 
 # definiraj listu s funkcijama povratnog poziva
 my_callbacks = [
-    keras.callbacks.TensorBoard(log_dir = 'logs/cnn_halved_group-' + time.strftime('%Y-%m-%d_%H-%M-%S'), # add time to make each run unique
+    keras.callbacks.TensorBoard(log_dir = 'logs/cnn_dropout-' + time.strftime('%Y-%m-%d_%H-%M-%S'), # add time to make each run unique
                                 update_freq = 100)
 ]
 
-model.compile(# optimizer='adam',
-                keras.optimizers.Adam(learning_rate=0.001),
+model.compile(optimizer='adam',
                 loss='categorical_crossentropy',
                 metrics=['accuracy'])
 

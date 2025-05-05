@@ -33,30 +33,36 @@ model = keras.Sequential()
 model.add(layers.Input(shape=(32,32,3)))
 model.add(layers.Conv2D(filters=32, kernel_size=(3, 3), activation='relu', padding='same'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
+model.add(layers.Dropout(0.35))
 model.add(layers.Conv2D(filters=64, kernel_size=(3, 3), activation='relu', padding='same'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
+model.add(layers.Dropout(0.35))
 model.add(layers.Conv2D(filters=128, kernel_size=(3, 3), activation='relu', padding='same'))
 model.add(layers.MaxPooling2D(pool_size=(2, 2)))
+model.add(layers.Dropout(0.35))
 model.add(layers.Flatten())
 model.add(layers.Dense(500, activation='relu'))
+model.add(layers.Dropout(0.35))
 model.add(layers.Dense(10, activation='softmax'))
 
 model.summary()
 
 # definiraj listu s funkcijama povratnog poziva
 my_callbacks = [
-    keras.callbacks.TensorBoard(log_dir = 'logs/cnn_halved_group-' + time.strftime('%Y-%m-%d_%H-%M-%S'), # add time to make each run unique
+    keras.callbacks.EarlyStopping(monitor = "val_loss",
+                                patience = 5,
+                                verbose = 1),
+    keras.callbacks.TensorBoard(log_dir = 'logs/cnn_early_stopping-' + time.strftime('%Y-%m-%d_%H-%M-%S'), # add time to make each run unique
                                 update_freq = 100)
 ]
 
-model.compile(# optimizer='adam',
-                keras.optimizers.Adam(learning_rate=0.001),
+model.compile(optimizer='adam',
                 loss='categorical_crossentropy',
                 metrics=['accuracy'])
 
 model.fit(X_train_n,
             y_train,
-            epochs = 15,
+            epochs = 30,
             batch_size = 64,
             callbacks = my_callbacks,
             validation_split = 0.1)

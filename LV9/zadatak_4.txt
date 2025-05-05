@@ -1,0 +1,10 @@
+1. Veličina serije:
+    Mala serija daje bolje generaliziranje, ali traje duže.
+    Velika serija je brža, ali može dovesti do slabijeg generaliziranja.
+2. Stopa učenja:
+    Optimalna stopa učenja (npr. 0.001) daje najbolje rezultate.
+    Prevelika ili premala stopa učenja može značajno smanjiti točnost.
+3.Izbacivanje slojeva:
+    Smanjuje složenost mreže, ali može dovesti do podtreniranja.
+4. Smanjenje skupa za učenje:
+    Smanjuje točnost modela zbog manjka podataka za učenje.
