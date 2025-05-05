@@ -47,3 +47,14 @@ knn_optimal.fit(X_train, y_train)
 test_accuracy = knn_optimal.score(X_test, y_test)
 
 print(f"Točnost na testnom skupu s optimalnim K={optimal_k}: {test_accuracy:.2f}")
+
+# Train KNN with optimal K
+knn_optimal = KNeighborsClassifier(n_neighbors=optimal_k)
+knn_optimal.fit(X_train[:, :2], y_train)
+
+# Calculate accuracy
+train_accuracy_optimal = accuracy_score(y_train, knn_optimal.predict(X_train[:, :2]))
+test_accuracy_optimal = accuracy_score(y_test, knn_optimal.predict(X_test[:, :2]))
+
+print(f"Training Accuracy (Optimal K={optimal_k}): {train_accuracy_optimal:.2f}")
+print(f"Testing Accuracy (Optimal K={optimal_k}): {test_accuracy_optimal:.2f}")

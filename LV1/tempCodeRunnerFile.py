@@ -1,0 +1,1 @@
+type, poruka = line.split('\t', 1)
